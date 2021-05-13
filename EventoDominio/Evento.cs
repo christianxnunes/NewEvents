@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EventoDominio
 {
+    // Usar caso o banco não aceitar o nome padrão da entidade
+    // [Table("EventoDetalhes")]
     public class Evento
     {
         public int Id { get; set; }

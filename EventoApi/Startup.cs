@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace EventoApi
 {
@@ -28,10 +29,14 @@ namespace EventoApi
             services.AddDbContext<EventoContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
+
             services.AddControllers().AddNewtonsoftJson(
                 x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-            
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
             services.AddScoped<IEventoService, EventoService>();
             
             services.AddScoped<IGeralPersist, GeralPersist>();
